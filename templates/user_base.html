@@ -1,0 +1,67 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Growy | {% block Utitle %}{% endblock Utitle %}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <!-- Custom styling -->
+    <style>
+    .hello_user{
+        font-size: 18px;
+        color: #fff;
+        letter-spacing: 1px;
+        text-transform: capitalize;
+        margin-top: 5px;
+    }
+    {% block style %}{% endblock style %}
+    </style>
+
+  </head>
+  <body>
+    
+      <nav class="navbar navbar-expand-md" style="background-color: #7951c9;">
+        <a class="navbar-brand" href="{% url 'user_panel' %}"><img src="{% static 'Img/logo.png' %}" class="img-responsive" alt="logo" width="50px" 
+        style=" border-radius: 50%;"></a>
+        <button class="navbar-toggler bg-light d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation"></button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'user_panel' %}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'reviews' %}">Reviews</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0"> 
+                <h4 class="mr-3 hello_user">Hey! {{request.user}} </h4>
+                <a href="{% url 'logout' %}" class="btn btn-danger my-2 mr-2 my-sm-0">Logout</a>
+            </form>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock content %}
+
+
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://vjs.zencdn.net/7.14.3/video.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+:root{
+    --color: #7951c9;
+    --white: #ffffff;
+    --cap: capitalize;
+    --up: uppercase;
+    --light: #F2ECFF;
+    --bold: bold;
+    --font: 18px;
+    --space: 1px;
+}
+.navbar-nav li a, .navbar-brand{
+    color: var(--white);
+    font-size: var(--font);
+    text-transform: var(--cap);
+    letter-spacing: var(--space);
+}

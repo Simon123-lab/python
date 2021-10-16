@@ -1,0 +1,116 @@
+{% extends 'client_base.html' %}
+{% load static %}
+
+{% block Ctitle %}Place Order{% endblock Ctitle %}
+
+{% block style %}
+    html,body { 
+		height: 100%; 
+		}
+		.global-container{
+			height:100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #f5f5f5;
+		}
+		form{
+			padding-top: 10px;
+			font-size: 14px;
+			margin-top: 30px;
+		}
+		.card-title{ font-weight:300; }
+		.btn{
+			font-size: 14px;
+			margin-top:20px;
+		}
+		.login-form{ 
+			width:400px;
+			margin:20px;
+		}
+		.sign-up{
+			text-align:center;
+			padding:20px 0 0;
+		}
+		.alert{
+			margin-bottom:-30px;
+			font-size: 13px;
+			margin-top:20px;
+		}
+{% endblock style %}
+
+{% block clientContent %}
+
+	<!-- user creation form -->
+	<div class="global-container">
+		<div class="card login-form">
+		<div class="card-body">
+			<h4 class="card-title text-center" style="font-weight: bold; color: #7951c9;">Place Order</h4>
+			<div class="card-text">
+			{% for message in messages %}
+			  <div class="alert text-center text-capitalize" style="background: #F2ECFF; color:#7951c9" role="alert">
+				{{message}}
+			  </div>
+			{% endfor %}
+
+				<form method="POST" action="" enctype="multipart/form-data">
+					{% csrf_token %}
+					
+					<div class="form-group">
+						<label for="username">{{form.url.label}} </label>
+						{{form.url}}
+					</div>
+	
+					<div class="form-group">
+						<label for="exampleInputEmail1">{{form.category.label}} </label>
+						{{form.category}}
+					</div>
+	
+					<div class="form-group">
+						<label for="exampleInputPassword1">{{form.quantity.label}} </label>
+						{{form.quantity}}
+						<p style="float:right;font-size:12px; color: #7951c9;">Calculate Amount</p>
+					</div><br>
+
+					<div class="form-group">
+						<label for="exampleInputPassword1">Account Name</label>
+						{{form.id_name}}
+					</div>
+
+                    <div class="form-group">
+						<label for="exampleInputPassword1">{{form.phone_no.label}} </label>
+						{{form.phone_no}}
+					</div>
+
+                    <div class="form-group">
+						<label for="exampleInputPassword1">Upload</label>
+						{{form.img}}
+					</div>
+					
+					<!-- <p style="float:left;font-size:12px;" id="chkvalid"></p>
+					<p style="float:left;font-size:12px; color:#7951c9;">Please mark the checkbox correctly! You cannot change 
+						the selection  again..
+					</p> -->
+			
+					<input type="submit" class="btn btn-primary btn-block" style="background: #7951c9;" value="Submit">
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<script>
+		var form_fields = document.getElementsByTagName('input')
+		form_fields[1].className='form-control'
+		form_fields[2].className='form-control'
+		form_fields[3].className='form-control'
+
+		var select_fields = document.getElementsByTagName('select')
+		select_fields[0].className='form-control'
+		select_fields[1].className='form-control'
+		console.log(select_fields)
+
+	</script>
+
+{% endblock clientContent %}

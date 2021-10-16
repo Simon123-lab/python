@@ -1,0 +1,39 @@
+{% extends 'user_base.html' %}
+
+{% block Utitle %}Champ Likes{% endblock Utitle %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row mt-5">
+            {% for i in data %}
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                    Featured Task
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Do Likes - <span class="text-success">0.50 PKR</span> </h5>
+                        <p class="card-text">Like this profile and earn Rs 0.50! 
+                            <br/><span class="text-danger">If you unfollow these accounts, your account will be banned.</span></p>
+                            <div id="fb-root"></div>
+                            <script async defer crossorigin="anonymous" 
+                                src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" 
+                                nonce="2BuiBhZy">
+                            </script>    
+                            <div class="fb-like"
+                                data-href= "{{i.url}}"
+                                data-width="50"
+                                data-layout="button" 
+                                data-action="like" 
+                                data-size="large" 
+                                data-share="false"> 
+                            </div>                  
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,97 @@
+{% extends 'user_base.html' %}
+{% load static %}
+
+{% block Utitle %}Watch Videos{% endblock Utitle %}
+
+{% block style %}
+
+  .disabledContent {
+            pointer-events: none;
+            opacity: 0.4;
+  }
+
+{% endblock style %}
+
+{% block content %}
+
+      <div class="container">
+       <div class="row mt-5">
+
+        {% for v in videos %}      
+
+            <div class="col-lg-4" id="main_cont">
+                <div class="card">
+                    <div class="card-header">
+                    Featured Task{{v.assign_id}}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Watch Video - <span class="text-success">0.75 PKR</span> </h5>
+                        <p class="card-text">Watch a video for 30 seconds and earn Rs 0.75! 
+                            <br/><span class="text-danger">If you leave the page before 30 seconds, the amount will not be count.</span></p>
+                            <!-- <iframe width="420" height="315" src="{{v.link}}" frameborder="0" allowfullscreen></iframe>  -->
+                            <button id="openVideoBtns" type="button" onclick="runTimer()" data-backdrop="static" class="btn  btn-primary" 
+                            data-toggle="modal" data-target="#m{{v.assign_id}} ">Watch Now
+                            </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- video access modal -->
+            <div class="modal" id="m{{v.assign_id}}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Do not leave the page!</h5>
+                        <h5 id="timer"></h5>
+                    </div>
+                    <div id="disableContainer" class="modal-body text-center">
+                        <iframe width="420" height="315" src="{{v.link}}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="modal-footer">
+                      <a href="{% url 'verify' %}" id="btnConfirm" class="btn btn-success" 
+                      style="pointer-events: none; background: grey;" >Done</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+        {% endfor %}
+
+       </div>
+   </div>
+
+   <script>
+    
+    var getDisableContent;
+
+    getDisableContent = document.getElementById("disableContainer");
+    getDisableContent.style.pointerEvents = "none";
+
+    var time = 3;
+    var x;
+    var showTimer = document.getElementById('timer');
+    var confrimTask = document.getElementById('btnConfirm');
+    var openVideoBtns = document.getElementById('openVideoBtns')
+
+    function timer(){
+     
+        showTimer.innerHTML = " " + time + "s";
+
+        x = setInterval(function(){
+          showTimer.innerHTML = time-- + "s";
+          if(time < 0){
+              clearInterval(x);
+              getDisableContent.style.pointerEvents = "all";
+              confrimTask.style.pointerEvents = "all";
+              confrimTask.style.background = "#5cb85c"; 
+              openVideoBtns.setAttribute("disabled","disabled");   
+          }
+       },1000)
+    }
+
+    function runTimer(){
+            timer();
+    }
+  </script>
+
+{% endblock content %}

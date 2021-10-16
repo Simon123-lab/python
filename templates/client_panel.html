@@ -1,0 +1,124 @@
+{% extends 'client_base.html' %}
+{% load static %}
+
+{% block title %}Hero Panel{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock head %}
+
+{% block style %}
+    .hello_client{
+        font-size: 18px;
+        color: #fff;
+        letter-spacing: 1px;
+        text-transform: capitalize;
+        margin-top: 5px;
+    }
+    .order_content{
+        height: 200px;
+    }
+{% endblock style %}
+
+{% block clientContent %}
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-lg-4">
+                <div class="order_content jumbotron">
+                    <h5>To Do Task:</h5>
+                    <a href="{% url 'order' %}" class="btn btn-outline-primary mt-3" style="width: 100%;">Place Order</a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="order_content jumbotron">
+                    <h5>Order Status</h5>
+                    <p class="mt-4 text-info" id="order_status">Currently, you have no order placed!<span></span> </p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="order_content jumbotron">
+                    <h5>Total Orders</h5>
+                    <p class="mt-3" id="counter" style="color: #ee0979; font-weight: bold; font-size: 2rem;"> 
+                    	{% for message in messages %}
+                            <div class="alert text-center text-capitalize" style="background: #F2ECFF; color:#7951c9" role="alert">
+                                {{message}}
+                            </div>
+			            {% endfor %}
+                     {{orders_count}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-12">
+                <h5>Order Details:</h5>
+                <table class="table">
+                    <thead>
+                      <tr style="background: #7951c9; color: #fff;">
+                        <th scope="col">No.</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Url</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Account Name</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody class="jumbotron">
+                
+                        {% comment %} <th scope="row">1</th> {% endcomment %}
+                        {% for o in order %}
+                        <tr> 
+                            <td>ORD- {{o.order_id}}</td>
+                            <td>{{o.category}} </td>
+                            <td>{{o.quantity}}</td>
+                            <td>{{o.url}}</td>
+                            <td class="text-success">{{o.amount}}</td>
+                            <td>{{o.id_name}}</td>
+                            <td>{{o.status}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+
+    <script>
+        const cols = document.querySelectorAll("td");
+        cols.forEach(col => {
+        if(col.innerText === "Pending" || col.innerText === "In Process") {
+          col.classList.add("text-warning");
+        } else if(col.innerText === "Approved"){
+           col.classList.add("text-primary");
+        }else if(col.innerText === "Cancelled") {
+           col.classList.add("text-danger");
+        }else if(col.innerText === "Completed") {
+           col.classList.add("text-success");
+        }
+        });
+        
+        var getCounter = document.getElementById('counter')
+        var printStatus = document.getElementById('order_status')
+        var len = getCounter.innerText.length
+        if(len == 1){
+            printStatus.innerText = 'Average';
+            printStatus.style.fontSize = '20px';
+        }
+        else if(len >= 2){
+            printStatus.innerText = 'Super';
+        }
+        else if(len >= 3){
+            printStatus.innerText = 'Excellent';
+        }
+       
+    </script>
+
+
+{% endblock clientContent %}

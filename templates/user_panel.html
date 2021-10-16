@@ -1,0 +1,127 @@
+{% extends 'user_base.html' %}
+{% load static %}
+
+{% block Utitle %}Champ Dashboard{% endblock Utitle %}
+
+{% block style %}
+    body{
+        margin: 0;
+        padding: 0;
+    }
+    .hello_user{
+        font-size: 18px;
+        color: #fff;
+        letter-spacing: 1px;
+        text-transform: capitalize;
+        margin-top: 5px;
+    }
+    .card{
+        float: left;
+        width: 100%;
+        height: 535px;
+    }
+    .task{
+        height: 200px;
+        text-align: center;
+    }
+    .likebtn{
+        color: #fff;
+        background: #ffa500;
+    }
+    .likebtn:hover{
+        color: #fff;
+    }
+    #side_title{
+        text-transform: uppercase;
+    }
+    .record{
+        height: 200px;
+    }
+    .card{
+        box-shadow: 20px #ccc;
+    }
+{% endblock style %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-lg-4">
+            <!-- contest section -->
+            <div class="card text-dark">
+              <img class="card-img-top" src="{% static 'Img/views.jpg' %}" alt="contest">
+              <div class="card-body">
+                <h4 class="card-title">Free 1000 Youtube Views</h4>
+                <p class="card-text text-danger"><marquee behavior="alternate" direction="right">This contest will end in a week... <i class="fas fa-hourglass-end"></i></marquee> </p>
+                <div class="key_points">
+                    <h6>Complete the following steps to enter into the contest.</h6>
+                    <ul>
+                        <li>Submit a <a href="{% url 'reviews' %}" class="text-primary"style="cursor: pointer;">review</a> about your experience at Growy.</li>
+                        <li>Share Growy link in 5 different social media groups.</li>
+                        <li>Register 3 users to Growy.</li>
+                    </ul>
+                    <a href="{% url 'entry' %}" class="btn btn-danger" style="width: 100%;">Submit Your Entry</a>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- user-panel essentials -->
+        <div class="col-lg-8">
+            <h6 class="mt-2" id="side_title">Start Work</h6>
+            <hr/>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="task jumbotron">
+                        <h5 class="text-success">Earn 1 PKR</h5>
+                        <a href="{% url 'videos' %}" class="btn btn-danger mt-2" style="width: 100%;">Watch Videos</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="task jumbotron">
+                        <h5 class="text-success">Earn 0.50 PKR</h5>
+                         <a href="{% url 'likes' %}" class="btn likebtn mt-2" style="width: 100%;">Do Likes</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="task jumbotron">
+                        <h5 class="text-success">Earn 0.50 PKR</h5>
+                        <a href="{% url 'follows' %}" class="btn btn-primary mt-2" style="width: 100%;">Do Follows</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- user work progress -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h6 id="side_title">Work Progress</h6>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="record jumbotron text-center">
+                                <h5 class="text-dark">Task Completed</h5>
+                                <p class="mt-4 text-danger" id="order_status">0%<span></span></p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="record jumbotron text-center">
+                                <h5 class="text-dark">Total Earnings</h5>
+                                <p class="mt-4 text-danger" id="order_status">0%<span></span></p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="record jumbotron">
+                                <h5 class="text-dark text-center">Withdraw</h5>
+                                <a href="{% url 'order' %}" class="btn btn-success mt-2" style="width: 100%;">Request</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
